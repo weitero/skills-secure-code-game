@@ -24,6 +24,8 @@ def validorder(order: Order):
         if item.type == 'payment':
             net += Decimal(str(item.amount))
         elif item.type == 'product':
+            if item.quantity >= 12:
+                return "Total amount payable for an order exceeded"
             net -= Decimal(str(item.amount * item.quantity))
         else:
             return "Invalid item type: %s" % item.type
